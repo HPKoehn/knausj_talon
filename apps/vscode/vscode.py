@@ -9,6 +9,9 @@ mod.apps.vscode = "app.name: Code.exe"
 mod.apps.vscode = "app.name: Visual Studio Code"
 mod.apps.vscode = "app.name: Code"
 mod.apps.vscode = "app.name: Code - OSS"
+mod.apps.vscode = "app.name: code-oss"
+mod.apps.vscode = "app.name: Electron"
+
 
 ctx.matches = r"""
 app: vscode

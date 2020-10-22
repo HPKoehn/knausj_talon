@@ -1,3 +1,4 @@
+os: windows
 -
 settings():
     #adjust the scale of the imgui to my liking
@@ -22,4 +23,4 @@ settings():
     user.mouse_wheel_down_amount = 120
 	
 # uncomment tag to enable mouse grid
-# tag(): user.mouse_grid_enabled
+tag(): user.mouse_grid_enabled

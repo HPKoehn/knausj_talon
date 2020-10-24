@@ -11,9 +11,11 @@ option left: key(keypad_7)
 option right: key(keypad_9)
 interface next: key(keypad_1)
 
-(target|next): 
-    key(t)
-    key(t)
+target [next]: 
+    user.ffxiv_press(3)
+target last:
+    user.ffxiv_press(4)
+    
 teleport initiate:
     key(enter)
     insert("/teleport")

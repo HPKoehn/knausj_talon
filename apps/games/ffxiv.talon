@@ -11,7 +11,9 @@ option left: key(keypad_7)
 option right: key(keypad_9)
 interface next: key(keypad_1)
 
-(target|next): key(t)
+(target|next): 
+    key(t)
+    key(t)
 teleport initiate:
     key(enter)
     insert("/teleport")

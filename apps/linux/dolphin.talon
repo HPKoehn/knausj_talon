@@ -1,4 +1,5 @@
 app: dolphin
+os: linux
 -
 
 (address bar | go address | go url): key(ctrl-l)

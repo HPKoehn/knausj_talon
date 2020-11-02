@@ -1,7 +1,7 @@
 app: discord
 -
-cancel: key(escape)
 
+cancel: key(escape)
 switch to: key(ctrl-k)
 server up: key(ctrl-alt-up)
 server down: key(ctrl-alt-down)

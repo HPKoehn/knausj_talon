@@ -16,6 +16,7 @@ target [next]: user.key(t)
 target last: user.key(ctrl-t)
 teleport initiate: user.ffxiv_macro("/teleport")
 target member <number_small>: key("f{number_small}")
+stop it: user.ffxiv_stop_repeat()
 
 job switch to <user.ffxiv_classes>: user.ffxiv_switch_mode("{ffxiv_classes}")
  

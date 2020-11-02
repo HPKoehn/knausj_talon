@@ -6,7 +6,8 @@ from os import listdir
 ctx = Context()
 mod = Module()
 apps = mod.apps
-    
+
+
 
 apps.final_fantasy_xiv="""
 app.name: steam_proton
@@ -49,8 +50,13 @@ def ffxiv_classes(m) -> str:
     return m[0]
 
 cast_job = None
-def cast_job_start(spell: str):
-    global cast_job
+cast_job_interruptible = True
+cast_job_spell = None
+
+def cast_job_start(spell: str, interruptible: bool = True):
+    global cast_job, cast_job_interruptible, cast_job_spell
+    cast_job_spell = spell
+    cast_job_interruptible = interruptible
     def in_function():
         actions.key(bindings[f"{current_class}.{spell}"])
     cast_job = cron.interval(gcd, in_function)
@@ -61,17 +67,37 @@ def cast_job_end():
         cron.cancel(cast_job)
         cast_job = None    
 
+def cast_job_resume():
+    global cast_job_interruptible, cast_job_spell
+    cast_job_start(cast_job_spell, cast_job_interruptible)
+
 @mod.action_class
 class Actions:
-    def ffxiv(spell: str):
+    def ffxiv_gcd(spell: str):
         """execute a commando"""
+        global cast_job_interruptible
         cast_job_end()
         actions.key(bindings[f"{current_class}.{spell}"])
-        
+        if not cast_job_interruptible:
+            cast_job_resume()
+    
+    def ffxiv_ogcd(spell: str):
+        """Execute the commando without regard for the global cool down"""
+        actions.key(bindings[f"{current_class}.{spell}"])        
+
     def ffxiv_cast_job(spell: str):
         """repeat the following commando"""
-        actions.user.ffxiv(spell)
+        actions.user.ffxiv_gcd(spell)
         cast_job_start(spell)
+
+    def ffxiv_repeat_job(spell: str):
+        """Repeat the following commando until stop"""
+        actions.user.ffxiv_gcd (spell)
+        cast_job_start(spell, False)
+    
+    def ffxiv_stop_repeat():
+        """ will stop any repeat job"""
+        cast_job_end()
 
     def ffxiv_macro(text: str):
         """execute a macro"""

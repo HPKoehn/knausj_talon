@@ -16,6 +16,7 @@ app.name: ffxiv_dx11.exe
 
 ctx.settings = {
     "key_wait": 10.0
+    #"key_hold": 10.0
 }
 
 
